@@ -1,0 +1,38 @@
+# 🔥 Dashboard Home Assistant – Poêle à Granulés (Public)
+
+Dashboard Lovelace pour Home Assistant permettant de suivre un poêle à granulés :
+- État ON/OFF
+- Puissance instantanée
+- Temps de fonctionnement (jour / mois)
+- Estimation de consommation de granulés
+- Coût journalier estimé
+
+## 📦 Contenu du dépôt
+- `dashboard_public.yaml` : Vue Lovelace prête à importer
+- `automations_public.yaml` : Automatisations de calcul
+- `helpers_public.yaml` : Helpers (input_number) nécessaires
+
+## ⚙️ Prérequis
+- Home Assistant à jour
+- Cartes custom :
+  - Mushroom Cards
+  - card-mod (optionnel pour le style)
+
+## 🚀 Installation
+1. Copier `helpers_public.yaml` dans votre config Home Assistant
+2. Redémarrer Home Assistant
+3. Copier `automations_public.yaml` dans vos automatisations
+4. Importer `dashboard_public.yaml` dans Lovelace (mode YAML)
+5. Adapter les entités suivantes à votre installation :
+   - `switch.poele_granules`
+   - `sensor.poele_puissance`
+   - `sensor.temperature_interieure`
+   - `sensor.humidite_interieure`
+
+## 🔧 Paramètres modifiables
+- Consommation granulés : 0.8 kg/h (modifiable dans l’automatisation)
+- Prix du granulé : 0.34 €/kg (modifiable dans le dashboard)
+
+
+
+
