@@ -1,0 +1,210 @@
+type: panel
+card_mod:
+  style: |
+    ha-card {
+      background: 
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(1px 1px at 40% 80%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 10% 90%, white, transparent),
+        radial-gradient(2px 2px at 70% 20%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 30% 50%, white, transparent),
+        radial-gradient(2px 2px at 50% 5%, white, transparent),
+        radial-gradient(1px 1px at 15% 40%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 85% 85%, white, transparent),
+        radial-gradient(1px 1px at 25% 15%, white, transparent),
+        radial-gradient(2px 2px at 95% 35%, white, transparent),
+        radial-gradient(1px 1px at 5% 65%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 55% 95%, white, transparent),
+        radial-gradient(1px 1px at 45% 25%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 75% 55%, white, transparent),
+        radial-gradient(1px 1px at 35% 75%, white, transparent),
+        radial-gradient(2px 2px at 22% 68%, white, transparent),
+        radial-gradient(1px 1px at 88% 42%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 12% 12%, white, transparent),
+        radial-gradient(1px 1px at 68% 88%, white, transparent),
+        radial-gradient(ellipse at 50% 100%, rgba(138,43,226,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 0%, rgba(72,61,139,0.2) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0e27 0%, #1a1a3e 40%, #16213e 70%, #0f0c29 100%);
+      padding: 20px;
+      border: none;
+    }
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Exemple – Poêle à Granulés
+        subtitle: 7.6 kW • Dashboard Énergétique
+        alignment: center
+        card_mod:
+          style: |
+            ha-card {
+              background: linear-gradient(135deg, rgba(42,42,62,0.85) 0%, rgba(58,58,94,0.85) 100%);
+              color: #ffffff;
+              border-radius: 24px;
+              box-shadow: 
+                0 8px 32px rgba(255,140,0,0.4),
+                0 0 80px rgba(138,43,226,0.2),
+                inset 0 0 40px rgba(255,165,0,0.1);
+              font-family: "Segoe UI", sans-serif;
+              position: relative;
+              padding: 28px 20px;
+              border: 2px solid rgba(255,165,0,0.3);
+              overflow: hidden;
+              margin-bottom: 16px;
+              backdrop-filter: blur(10px);
+            }
+            ha-card::before {
+              content: '🔥';
+              position: absolute;
+              left: 25px;
+              top: 50%;
+              transform: translateY(-50%);
+              font-size: 40px;
+              animation: flamePulse 2s ease-in-out infinite;
+              filter: drop-shadow(0 0 20px rgba(255,140,0,1));
+            }
+            @keyframes flamePulse {
+              0%, 100% { 
+                transform: translateY(-50%) scale(1); 
+                opacity: 1;
+              }
+              50% { 
+                transform: translateY(-55%) scale(1.12); 
+                opacity: 0.88;
+              }
+            }
+            .header {
+              margin-left: 60px;
+              text-shadow: 0 0 30px rgba(255,140,0,0.9);
+            }
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: État Poêle
+            secondary: >
+              {% if states('sensor.example_stove_power') | float > 10 %}
+                🔥 Allumé
+              {% else %}
+                ⭕ Éteint
+              {% endif %}
+            icon: mdi:fire
+            icon_color: white
+            layout: vertical
+            tap_action:
+              action: toggle
+              entity: switch.example_stove_switch
+            card_mod:
+              style: |
+                ha-card {
+                  background: linear-gradient(135deg, rgba(255,107,53,0.95) 0%, rgba(255,140,66,0.95) 100%);
+                  border-radius: 24px;
+                  box-shadow: 
+                    0 8px 32px rgba(255,107,53,0.5),
+                    0 0 60px rgba(255,107,53,0.3);
+                  border: 1px solid rgba(255,200,150,0.3);
+                  height: 180px;
+                  transition: all 0.3s ease;
+                  backdrop-filter: blur(10px);
+                }
+                ha-card:hover {
+                  transform: translateY(-4px);
+                  box-shadow: 
+                    0 12px 40px rgba(255,107,53,0.6),
+                    0 0 80px rgba(255,107,53,0.4);
+                }
+                .primary {
+                  color: #ffffff !important;
+                  font-weight: 600 !important;
+                  font-size: 1em !important;
+                  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                  margin-top: 8px;
+                }
+                .secondary {
+                  color: #ffffff !important;
+                  font-weight: 700 !important;
+                  font-size: 1.5em !important;
+                  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+                }
+
+          - type: custom:mushroom-template-card
+            primary: Puissance Active
+            secondary: "{{ states('sensor.example_stove_power') }} W"
+            icon: mdi:flash
+            icon_color: white
+            layout: vertical
+            card_mod:
+              style: |
+                ha-card {
+                  background: linear-gradient(135deg, rgba(0,212,255,0.95) 0%, rgba(0,153,204,0.95) 100%);
+                  border-radius: 24px;
+                  box-shadow: 
+                    0 8px 32px rgba(0,212,255,0.5),
+                    0 0 60px rgba(0,212,255,0.3);
+                  border: 1px solid rgba(150,230,255,0.3);
+                  height: 180px;
+                  transition: all 0.3s ease;
+                  backdrop-filter: blur(10px);
+                }
+                ha-card:hover {
+                  transform: translateY(-4px);
+                  box-shadow: 
+                    0 12px 40px rgba(0,212,255,0.6),
+                    0 0 80px rgba(0,212,255,0.4);
+                }
+                .primary {
+                  color: #ffffff !important;
+                  font-weight: 600 !important;
+                  font-size: 1em !important;
+                  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                  margin-top: 8px;
+                }
+                .secondary {
+                  color: #ffffff !important;
+                  font-weight: 700 !important;
+                  font-size: 1.5em !important;
+                  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+                }
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Température Poêle
+            secondary: "{{ states('sensor.example_temperature') }} °C"
+            icon: mdi:thermometer
+            icon_color: white
+            layout: vertical
+
+          - type: custom:mushroom-template-card
+            primary: Granulés Restants
+            secondary: "{{ states('sensor.example_granules') }} kg"
+            icon: mdi:bag-personal
+            icon_color: white
+            layout: vertical
+
+          - type: custom:mushroom-template-card
+            primary: Consommation Journalière
+            secondary: "{{ states('sensor.example_daily_consumption') }} kg"
+            icon: mdi:calendar-today
+            icon_color: white
+            layout: vertical
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Consommation Mensuelle
+            secondary: "{{ states('sensor.example_monthly_consumption') }} kg"
+            icon: mdi:calendar-month
+            icon_color: white
+            layout: vertical
+
+          - type: custom:mushroom-template-card
+            primary: Consommation Annuelle
+            secondary: "{{ states('sensor.example_yearly_consumption') }} kg"
+            icon: mdi:calendar
+            icon_color: white
+            layout: vertical
