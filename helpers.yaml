@@ -1,0 +1,24 @@
+input_number:
+  granules_aujourdhui:
+    name: Granulés aujourd’hui (kg)
+    min: 0
+    max: 50
+    step: 0.1
+
+  granules_ce_mois:
+    name: Granulés ce mois (kg)
+    min: 0
+    max: 500
+    step: 0.1
+
+  temps_aujourdhui:
+    name: Temps fonctionnement aujourd’hui (h)
+    min: 0
+    max: 24
+    step: 0.01
+
+  temps_ce_mois:
+    name: Temps fonctionnement ce mois (h)
+    min: 0
+    max: 744
+    step: 0.1
