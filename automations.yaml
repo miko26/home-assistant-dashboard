@@ -1,0 +1,46 @@
+- alias: Poêle - Calcul fonctionnement et granulés (public)
+  trigger:
+    - platform: time_pattern
+      minutes: "/1"
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.poele_puissance
+      above: 10
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.temps_aujourdhui
+      data:
+        value: "{{ (states('input_number.temps_aujourdhui') | float + 0.01667) | round(4) }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.temps_ce_mois
+      data:
+        value: "{{ (states('input_number.temps_ce_mois') | float + 0.01667) | round(4) }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.granules_aujourdhui
+      data:
+        value: "{{ (states('input_number.temps_aujourdhui') | float * 0.8) | round(3) }}"
+
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.granules_ce_mois
+      data:
+        value: "{{ (states('input_number.temps_ce_mois') | float * 0.8) | round(3) }}"
+  mode: single
+
+- alias: Poêle - Reset quotidien (public)
+  trigger:
+    - platform: time
+      at: "00:00:00"
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id:
+          - input_number.temps_aujourdhui
+          - input_number.granules_aujourdhui
+      data:
+        value: 0
